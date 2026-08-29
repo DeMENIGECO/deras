@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Deras — Un sistema operativo fatto in DrawNote</title>
+
+    <meta name="description"
+          content="Deras è un sistema operativo leggero e open source realizzato interamente in DrawNote.">
+
+    <style>
+        :root {
+            --green: #22c55e;
+            --green-dark: #16a34a;
+            --green-light: #4ade80;
+
+            --bg: #ffffff;
+            --bg-secondary: #f6f8f7;
+            --text: #17201b;
+            --text-secondary: #59635d;
+            --border: #dfe6e1;
+
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont,
+                         "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: var(--nav-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            color: var(--text);
+            text-decoration: none;
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .brand img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--green-dark);
+        }
+
+        .github {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 9px 16px;
+            border-radius: 10px;
+
+            background: var(--green);
+            color: white !important;
+
+            transition: 0.2s;
+        }
+
+        .github:hover {
+            background: var(--green-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Hamburger */
+
+        .menu-button {
+            display: none;
+
+            border: none;
+            background: transparent;
+
+            width: 44px;
+            height: 44px;
+
+            cursor: pointer;
+
+            font-size: 27px;
+            color: var(--text);
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: calc(100vh - 72px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 90px 7%;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at 50% 20%,
+                    rgba(34, 197, 94, 0.13),
+                    transparent 35%
+                );
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-logo {
+            width: min(400px, 75vw);
+            margin-bottom: 20px;
+
+            filter: drop-shadow(
+                0 12px 25px rgba(34, 197, 94, 0.15)
+            );
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 86px);
+            line-height: 1;
+            letter-spacing: -3px;
+
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: var(--green);
+        }
+
+        .hero p {
+            max-width: 680px;
+            margin: 0 auto;
+
+            font-size: clamp(18px, 2.5vw, 22px);
+            color: var(--text-secondary);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+
+            margin-top: 34px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 150px;
+            padding: 13px 22px;
+
+            border-radius: 12px;
+
+            text-decoration: none;
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .button-primary {
+            background: var(--green);
+            color: white;
+
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.22);
+        }
+
+        .button-primary:hover {
+            background: var(--green-dark);
+            transform: translateY(-2px);
+        }
+
+        .button-secondary {
+            background: var(--bg);
+            color: var(--text);
+
+            border: 1px solid var(--border);
+        }
+
+        .button-secondary:hover {
+            border-color: var(--green);
+            color: var(--green-dark);
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        section {
+            padding: 100px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 16px;
+        }
+
+        .section-description {
+            max-width: 680px;
+            margin: 0 auto 50px;
+
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+
+        .cards {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            padding: 30px;
+
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            transition: 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(34, 197, 94, 0.45);
+            box-shadow: var(--shadow);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 20px;
+
+            border-radius: 13px;
+
+            background: rgba(34, 197, 94, 0.12);
+            color: var(--green-dark);
+
+            font-size: 23px;
+        }
+
+        .card h3 {
+            margin-bottom: 9px;
+            font-size: 21px;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+        }
+
+        /* =========================
+           SPECIAL SECTION
+        ========================= */
+
+        .special {
+            background: #0d1117;
+            color: white;
+            text-align: center;
+        }
+
+        .special h2 {
+            font-size: clamp(32px, 5vw, 52px);
+            margin-bottom: 18px;
+        }
+
+        .special h2 span {
+            color: var(--green-light);
+        }
+
+        .special p {
+            max-width: 700px;
+            margin: auto;
+
+            color: #aeb7b1;
+            font-size: 18px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 35px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+
+            color: var(--text-secondary);
+        }
+
+        footer strong {
+            color: var(--text);
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 750px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+
+                top: 72px;
+                left: 0;
+                right: 0;
+
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+
+                padding: 18px 5% 24px;
+
+                background: rgba(255, 255, 255, 0.97);
+                backdrop-filter: blur(15px);
+
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 12px 25px rgba(0, 0, 0, 0.07);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 12px 5px;
+            }
+
+            .github {
+                justify-content: center;
+            }
+
+            .hero {
+                min-height: calc(100vh - 72px);
+                padding: 70px 6%;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            section {
+                padding: 75px 6%;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+        <a href="#" class="brand">
+            <img src="docs/images/logo_green.png" alt="Logo Deras">
+            Deras
+        </a>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Apri menu"
+            aria-expanded="false">
+            ☰
+        </button>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#cos-e">Cos'è Deras</a>
+            <a href="#caratteristiche">Caratteristiche</a>
+            <a href="#installazione">Installazione</a>
+            <a
+                href="https://github.com/"
+                class="github"
+                target="_blank"
+                rel="noopener">
+                GitHub
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <img
+                    src="images/logo_green.png"
+                    alt="Deras"
+                    class="hero-logo">
+
+                <h1>
+                    Un OS fatto in <span>DrawNote.</span>
+                </h1>
+
+                <p>
+                    Deras è un sistema operativo leggero e open source,
+                    realizzato interamente in un'app per disegnare e prendere appunti.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="download"
+                       class="button button-primary">
+                        Download
+                    </a>
+
+                    <a href="https://github.com/DeMENIGECO/Deras"
+                       class="button button-secondary"
+                       target="_blank"
+                       rel="noopener">
+                        Vedi su GitHub
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- COS'È -->
+
+        <section id="cos-e">
+
+            <h2 class="section-title">
+                Cos'è Deras?
+            </h2>
+
+            <p class="section-description">
+                Un progetto nato da un'idea semplice e un po' folle:
+                creare un sistema operativo usando un blocco note.
+            </p>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <div class="card-icon">🌱</div>
+
+                    <h3>Leggero</h3>
+
+                    <p>
+                        Deras nasce con l'obiettivo di essere semplice,
+                        leggero e facile da esplorare.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-icon">🔓</div>
+
+                    <h3>Open Source</h3>
+
+                    <p>
+                        Il codice e i contenuti del progetto sono
+                        disponibili per essere studiati e modificati.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-icon">📝</div>
+
+                    <h3>Fatto in DrawNote</h3>
+
+                    <p>
+                        La caratteristica più particolare:
+                        Deras è stato sviluppato direttamente in DrawNote.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SEZIONE SPECIALE -->
+
+        <section class="special">
+
+            <h2>
+                Sì, è davvero fatto in
+                <span>un blocco note.</span>
+            </h2>
+
+            <p>
+                Niente IDE giganteschi. Niente strumenti complicati.
+                Solo DrawNote, tanta pazienza e un'idea abbastanza folle.
+            </p>
+
+        </section>
+
+
+        <!-- INSTALLAZIONE -->
+
+        <section id="installazione">
+
+            <h2 class="section-title">
+                Pronto per provare Deras?
+            </h2>
+
+            <p class="section-description">
+                Scarica Deras e importalo direttamente in DrawNote.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#"
+                   class="button button-primary">
+                    Scarica Deras
+                </a>
+
+                <a href="https://play.google.com/store/apps/details?id=com.dragonnest.drawnote"
+                   class="button button-secondary"
+                   target="_blank"
+                   rel="noopener">
+                    Scarica DrawNote
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div>
+            <strong>Deras</strong> — Made with 💚 and DrawNote
+        </div>
+
+        <div>
+            Open Source
+        </div>
+
+    </footer>
+
+
+    <!-- HAMBURGER -->
+
+    <script>
+        const menuButton = document.getElementById("menuButton");
+        const navLinks = document.getElementById("navLinks");
+
+        menuButton.addEventListener("click", () => {
+
+            const isOpen = navLinks.classList.toggle("open");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                isOpen
+            );
+
+            menuButton.textContent = isOpen ? "✕" : "☰";
+        });
+
+
+        // Chiude il menu quando si clicca su un link
+        document.querySelectorAll(".nav-links a").forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                navLinks.classList.remove("open");
+
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                menuButton.textContent = "☰";
+            });
+
+        });
+    </script>
+
+</body>
+</html>

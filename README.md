@@ -24,3 +24,5 @@ se non hai DrawNote, installalo:
 4. Seleziona *importa file dati grezzi*
 5. Seleziona il file scaricato
 6. Imposta la cartella in cui dove vorrai installare Deras
+
+Ora

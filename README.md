@@ -18,7 +18,8 @@ se non hai DrawNote, installalo:
 
 ## Installazione
 
-1. Scarica il file `dnotesapp`
+1. Scarica il file `dnotesp` o `dnotes`
 2. Crea la cartella dove vuoi installare Deras.
-3. Vai sul + e clicca i tre punti, e *importa da fonte esterna*
-<img src="docs/images/readme/Installation_1.jpg" width="350" alt="Screenshot di DrawNote">
+3. Vai sul + e clicca i tre punti, e *importa da fonte esterna* <img src="docs/images/readme/Installation_1.jpg" width="350" alt="Screenshot di DrawNote">
+4. Seleziona *importa file dati grezzi*
+5. Seleziona il file scaricato

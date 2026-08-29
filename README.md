@@ -24,5 +24,18 @@ se non hai DrawNote, installalo:
 4. Seleziona *importa file dati grezzi*
 5. Seleziona il file scaricato
 6. Imposta la cartella in cui dove vorrai installare Deras
+7. Fai click su conferma 
 
-Ora
+Ora Deras è installato nella cartella `Deras` della cartella che hai scelto.
+
+---
+
+## Avviare Deras
+
+Per avviare Deras, apri `.main` e fai click sul collegamento nota gigante, e andrai alla lockscreen.
+
+---
+
+## Informazioni sul progetto
+
+Deras è iniziato a essere sviluppato a fine dicembre e lo sviluppo della prima versione è durato 2 anni... su un blocco note.

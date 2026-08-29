@@ -9,7 +9,15 @@ realizzato in **DrawNote**, letteralmente un blocco note.
 
 se non hai DrawNote, installalo:
 
-[![Play Store](https://img.shields.io/badge/Download-Play_Store-green?logo=android)]
+[![Play Store](https://img.shields.io/badge/Download-Play_Store-green?logo=android)](https://play.google.com/store/apps/details?id=com.dragonnest.drawnote)
 
->!NOTE
+>[!NOTE]
 > L'app per iOS è stata eliminata e non è più disponibile.
+
+---
+
+## Installazione
+
+1. Scarica il file `dnotesapp`
+2. Crea la cartella dove vuoi installare Deras.
+3. Vai sul + e clicca i tre punti, e *importa da fonte esterna*

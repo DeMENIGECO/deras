@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Download — Deras</title>
+
+    <meta name="description"
+          content="Scarica Deras, il sistema operativo open source realizzato in DrawNote.">
+
+    <style>
+        :root {
+            --green: #22c55e;
+            --green-dark: #16a34a;
+            --green-light: #4ade80;
+
+            --bg: #ffffff;
+            --bg-secondary: #f6f8f7;
+            --text: #17201b;
+            --text-secondary: #59635d;
+            --border: #dfe6e1;
+
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont,
+                         "Segoe UI", sans-serif;
+
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: var(--nav-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            color: var(--text);
+            text-decoration: none;
+
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .brand img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--green-dark);
+        }
+
+        .github {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 9px 16px;
+
+            border-radius: 10px;
+
+            background: var(--green);
+            color: white !important;
+
+            transition: 0.2s;
+        }
+
+        .github:hover {
+            background: var(--green-dark);
+            transform: translateY(-1px);
+        }
+
+        /* =========================
+           HAMBURGER
+        ========================= */
+
+        .menu-button {
+            display: none;
+
+            width: 44px;
+            height: 44px;
+
+            border: none;
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 27px;
+            color: var(--text);
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .page-header {
+            padding: 90px 7% 55px;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(34, 197, 94, 0.14),
+                    transparent 40%
+                );
+        }
+
+        .page-header img {
+            width: 150px;
+            max-width: 60vw;
+
+            margin-bottom: 20px;
+
+            filter: drop-shadow(
+                0 10px 20px rgba(34, 197, 94, 0.15)
+            );
+        }
+
+        .page-header h1 {
+            font-size: clamp(42px, 7vw, 70px);
+            line-height: 1.05;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 16px;
+        }
+
+        .page-header h1 span {
+            color: var(--green);
+        }
+
+        .page-header p {
+            max-width: 650px;
+
+            margin: auto;
+
+            color: var(--text-secondary);
+
+            font-size: 19px;
+        }
+
+        /* =========================
+           DOWNLOAD
+        ========================= */
+
+        .download-section {
+            padding: 35px 7% 100px;
+        }
+
+        .download-container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .download-card {
+            padding: 34px;
+
+            background: var(--bg-secondary);
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            box-shadow: var(--shadow);
+        }
+
+        .version-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 28px;
+        }
+
+        .version-header h2 {
+            font-size: 30px;
+        }
+
+        .latest {
+            padding: 5px 11px;
+
+            border-radius: 999px;
+
+            background: rgba(34, 197, 94, 0.12);
+            color: var(--green-dark);
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .version-description {
+            margin-bottom: 25px;
+
+            color: var(--text-secondary);
+        }
+
+        .download-files {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .file {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 17px 18px;
+
+            background: var(--bg);
+
+            border: 1px solid var(--border);
+            border-radius: 13px;
+
+            text-decoration: none;
+            color: var(--text);
+
+            transition: 0.2s;
+        }
+
+        .file:hover {
+            border-color: var(--green);
+            transform: translateY(-2px);
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .file-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: rgba(34, 197, 94, 0.12);
+
+            font-size: 21px;
+        }
+
+        .file-name {
+            font-weight: 750;
+        }
+
+        .file-type {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .download-arrow {
+            color: var(--green-dark);
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           INSTALL INFO
+        ========================= */
+
+        .info {
+            margin-top: 22px;
+
+            padding: 20px;
+
+            border-radius: 14px;
+
+            background: rgba(34, 197, 94, 0.08);
+
+            border: 1px solid rgba(34, 197, 94, 0.18);
+        }
+
+        .info strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .info p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* =========================
+           OLD VERSIONS
+        ========================= */
+
+        .old-versions {
+            margin-top: 60px;
+        }
+
+        .old-versions h2 {
+            margin-bottom: 18px;
+            font-size: 27px;
+        }
+
+        .old-version {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 18px 20px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .old-version:first-of-type {
+            border-top: 1px solid var(--border);
+        }
+
+        .old-version span {
+            color: var(--text-secondary);
+        }
+
+        .old-version a {
+            color: var(--green-dark);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .old-version a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 35px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            border-top: 1px solid var(--border);
+
+            color: var(--text-secondary);
+        }
+
+        footer strong {
+            color: var(--text);
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 750px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+
+                top: 72px;
+                left: 0;
+                right: 0;
+
+                display: none;
+
+                flex-direction: column;
+                align-items: stretch;
+
+                padding: 18px 5% 24px;
+
+                background: rgba(255, 255, 255, 0.97);
+
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+
+                border-bottom: 1px solid var(--border);
+
+                box-shadow:
+                    0 12px 25px rgba(0, 0, 0, 0.07);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 12px 5px;
+            }
+
+            .github {
+                justify-content: center;
+            }
+
+            .page-header {
+                padding: 65px 6% 40px;
+            }
+
+            .page-header img {
+                width: 120px;
+            }
+
+            .download-section {
+                padding: 25px 6% 75px;
+            }
+
+            .download-card {
+                padding: 22px;
+            }
+
+            .version-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .file {
+                padding: 15px;
+            }
+
+            .file-info {
+                min-width: 0;
+            }
+
+            .file-name {
+                word-break: break-word;
+            }
+
+            .old-version {
+                gap: 15px;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <a href="" class="brand">
+            <img src="images/logo_green.png" alt="Logo Deras">
+            Deras
+        </a>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Apri menu"
+            aria-expanded="false">
+            ☰
+        </button>
+
+        <div class="nav-links" id="navLinks">
+
+            <a href="./">
+                Home
+            </a>
+
+            <a href="download">
+                Download
+            </a>
+
+            <a href="#">
+                Docs (in sviluppo)
+            </a>
+
+            <a
+                href="https://github.com/DeMENIGECO/Deras"
+                class="github"
+                target="_blank"
+                rel="noopener">
+                GitHub
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HEADER -->
+
+    <header class="page-header">
+
+        <img
+            src="images/logo_green.png"
+            alt="Logo Deras">
+
+        <h1>
+            Scarica <span>Deras.</span>
+        </h1>
+
+        <p>
+            Ottieni l'ultima versione di Deras e installala
+            direttamente in DrawNote.
+        </p>
+
+    </header>
+
+
+    <!-- DOWNLOAD -->
+
+    <main>
+
+        <section class="download-section">
+
+            <div class="download-container">
+
+                <!-- ULTIMA VERSIONE -->
+
+                <div class="download-card">
+
+                    <div class="version-header">
+
+                        <div>
+                            <h2>Deras 1.0</h2>
+                        </div>
+
+                        <span class="latest">
+                            ULTIMA VERSIONE
+                        </span>
+
+                    </div>
+
+                    <p class="version-description">
+                        La prima versione pubblica di Deras.
+                        Scarica il file compatibile con la tua installazione
+                        di DrawNote.
+                    </p>
+
+
+                    <div class="download-files">
+
+                        <a href="files/deras-1.0.0.dnotesp"
+                           class="file"
+                           download>
+
+                            <div class="file-info">
+
+                                <div class="file-icon">
+                                    📦
+                                </div>
+
+                                <div>
+                                    <div class="file-name">
+                                        Deras.dnotesp
+                                    </div>
+
+                                    <div class="file-type">
+                                        DrawNote Project
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="download-arrow">
+                                ↓
+                            </div>
+
+                        </a>
+
+                    </div>
+
+
+                    <div class="info">
+
+                        <strong>💡 Come si installa?</strong>
+
+                        <p>
+                            Dopo aver scaricato il file, apri DrawNote
+                            e usa la funzione
+                            <b>"Importa dati da fonte esterna"</b>.
+                            Per la guida completa consulta la documentazione.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- VERSIONI PRECEDENTI -->
+
+                <div class="old-versions">
+
+                    <h2>
+                        Versioni precedenti
+                    </h2>
+
+                    <div class="old-version">
+
+                        <div>
+                            <strong>Nessuna verisone precendente</strong><br>
+                            <span>Deras è nuovo. Non ha vecchie versioni.</span>
+                        </div>
+
+                        <a href="#">
+                            🚫
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div>
+            <strong>Deras</strong> — Made with 💚 and DrawNote
+        </div>
+
+        <div>
+            Open Source
+        </div>
+
+    </footer>
+
+
+    <!-- HAMBURGER -->
+
+    <script>
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+        const navLinks =
+            document.getElementById("navLinks");
+
+
+        menuButton.addEventListener("click", () => {
+
+            const isOpen =
+                navLinks.classList.toggle("open");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                isOpen
+            );
+
+            menuButton.textContent =
+                isOpen ? "✕" : "☰";
+
+        });
+
+
+        // Chiude il menu quando viene cliccato un link
+
+        document.querySelectorAll(".nav-links a")
+            .forEach(link => {
+
+                link.addEventListener("click", () => {
+
+                    navLinks.classList.remove("open");
+
+                    menuButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                    menuButton.textContent = "☰";
+
+                });
+
+            });
+
+    </script>
+
+</body>
+</html>

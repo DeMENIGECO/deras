@@ -1,0 +1,22 @@
+name: Attach Deras to Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  attach:
+    name: Attach Deras.dnotesp
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload Deras.dnotesp to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: source/Deras.dnotesp

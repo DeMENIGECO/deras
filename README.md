@@ -23,3 +23,4 @@ se non hai DrawNote, installalo:
 3. Vai sul + e clicca i tre punti, e *importa da fonte esterna* <img src="docs/images/readme/Installation_1.jpg" width="350" alt="Screenshot di DrawNote">
 4. Seleziona *importa file dati grezzi*
 5. Seleziona il file scaricato
+6. Imposta la cartella in cui dove vorrai installare Deras
